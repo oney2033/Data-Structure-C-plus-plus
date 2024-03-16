@@ -5,7 +5,7 @@
 
 template<class T>
 class LinearLish
-{
+{	
 public:
 	virtual ~LinearLish() {};
 	virtual bool empty()const = 0;	//当列表为空时返回true

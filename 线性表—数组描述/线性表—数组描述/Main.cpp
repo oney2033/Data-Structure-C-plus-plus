@@ -2,15 +2,64 @@
 #include"LinearLish.h"
 #include"myExceptions.h"
 #include<iostream>
+#include<numeric>
 using namespace std;
 int main()
 {
+	//测试迭代器
+	//创建一个数组
+	arrayList<int>t(2);
+	t.insert(0, 2);
+	t.insert(1, 6);
+	t.insert(0, 1);
+	t.insert(2, 4);
+	t.insert(3, 5);
+	t.insert(2, 3);
+	cout << "Inserted 6 integers, list t should be 1 2 3 4 5 6" << endl;
+	cout << "Size of t = " << t.size() << endl;
+	cout << "Capacity of t = " << t.capacity() << endl;
+
+	//测试迭代器的功能i++和++i
+	cout << "Ouput using forward iterators pre and post ++" << endl;
+	for (arrayList<int>::iterator i = t.begin(); i != t.end(); i++)
+	{
+		cout << *i << " ";
+	}
+	cout << endl;
+	for (arrayList<int>::iterator i = t.begin(); i != t.end(); ++i)
+	{
+		cout << *i << " ";
+	}
+	cout << endl;
+
+	//测试迭代器的功能i--和--i
+	cout << "Ouput using backward iterators pre and post --" << endl;
+	for (arrayList<int>::iterator i = t.end(); i != t.begin(); cout << *(--i) << " ");
+	cout << endl;
+	for (arrayList<int>::iterator i = t.end(); i != t.begin();)
+	{
+		i--;
+		cout << *i << " ";
+		//列表内的元素加1
+		*i += 1;
+	}
+	cout << endl;
+	//输出加1后的列表
+	cout << "Incremented by 1 list is " << t << endl;
+
+	//尝试一些STL算法
+	std::reverse(t.begin(), t.end());
+	cout << "The reversed list is " << t << endl;
+	int sum = std::accumulate(t.begin(), t.end(), 0);
+	cout << "The sum of the elements is " << sum << endl;
+
+	//测试非迭代器
 	//测试构造数据
 	LinearLish<double>* x = new arrayList<double>(20);
 	arrayList<int>y(2), z;
 
 	//测试获取容量的函数
-	std::cout 
+	std::cout
 		<< "Capacity of x, y, z = "
 		<< ((arrayList<double>*)x)->capacity() << ","
 		<< y.capacity() << ","
@@ -95,5 +144,6 @@ int main()
 	y.insert(0, 7);
 	cout << "y is " << y << endl;
 	return 0;
+
 
 }
