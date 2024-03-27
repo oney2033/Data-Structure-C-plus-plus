@@ -1,10 +1,46 @@
 #include"Chain.h"
 #include<iostream>
 #include"LinearLish.h"
+#include<numeric>
+using namespace std;
 
 //测试链表类
 int main()
 {
+	// 创建链表
+	chain<int> y;
+	y.insert(0, 2);
+	y.insert(1, 6);
+	y.insert(0, 1);
+	y.insert(2, 4);
+	y.insert(3, 5);
+	y.insert(2, 3);
+	cout << "Inserted 6 integers, list y should be 1 2 3 4 5 6" << endl;
+	cout << "Size of y = " << y.size() << endl;
+
+	// 测试迭代器
+	cout << "Ouput using forward iterators pre and post ++" << endl;
+	for (chain<int>::iterator i = y.begin();
+		i != y.end(); i++)
+		cout << *i << "  ";
+	cout << endl;
+	for (chain<int>::iterator i = y.begin();
+		i != y.end(); ++i)
+	{
+		cout << *i << "  ";
+		*i += 1;
+	}
+	cout << endl;
+	
+	cout << "Incremented by 1 list is " << y << endl;
+
+	// 试用STL算法
+	int sum = std::accumulate(y.begin(), y.end(), 0);
+	cout << "The sum of the elements is " << sum << endl;
+
+	return 0;
+
+#if 0
 	//测试构造函数
 	LinearLish<double>* x = new chain<double>;
 	chain<int> y, z;
@@ -82,4 +118,5 @@ int main()
 	std::cout << "y is " << y << std::endl;
 
 	return 0;
+#endif
 }

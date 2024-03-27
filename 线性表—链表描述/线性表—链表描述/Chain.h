@@ -21,6 +21,61 @@ public:
 	void erase(int theIndex);
 	void insert(int theIndex, const T& theElment);
 	void output(std::ostream& out)const;
+	void clear();
+	void push_back(const T& theElment);
+
+	//链表的迭代器开始定义
+	class iterator;
+	iterator begin() { return iterator(firstNode); }
+	iterator end() { return iterator(NULL); }
+
+	class iterator
+	{
+	public:
+		//typedef std::forward_iterator_tag  iterator_category;
+		using  iterator_category = std::forward_iterator_tag;
+	
+		//typedef T value_type;
+		using value_type = T;
+	
+		//typedef std::ptrdiff_t difference_type;
+		using difference_type = std::ptrdiff_t;
+	
+		//typedef T* pointer;
+		using pointer = T*;
+	
+		//typedef T& reference;
+		using reference = T&;
+
+		iterator(chainNode<T>* thenode = NULL)
+		{
+			node = thenode;
+		}
+
+		T& operator*()const { return node->element; }
+		T* operator->()const { return &node->element; }
+
+		iterator& operator++() { node = node->next; return *this; }
+		iterator operator++(int)
+		{
+			iterator old = *this;
+			node = node->next;
+			return old;
+		}
+
+		bool operator!=(const iterator right)const
+		{
+			return node != right.node;
+		}
+
+		bool operator==(const iterator right)const
+		{
+			return node == right.node;
+		}
+	private:
+		chainNode<T>* node;
+	};
+	//迭代器结束定义
 
 protected:
 	//如果索引无效，抛出异常
@@ -180,6 +235,35 @@ void chain<T>::insert(int theIndex, const T& theElement)
 		p->next = new chainNode<T>(theElement, p->next);
 	}
 		listSize++;
+}
+
+template<class T>
+void chain<T>::clear()
+{
+	while (firstNode != NULL)
+	{
+		chainNode<T>* nextNode = firstNode->next;
+		delete firstNode;
+		firstNode = nextNode;
+	}
+	listSize = 0;
+}
+
+template<class T>
+void chain<T>::push_back(const T& theElment)
+{
+	chainNode<T>* newNode = new chainNode<T>(theElment, NULL);
+	if (firstNode == NULL)
+		firstNode = newNode;
+	else
+	{
+		chainNode<T>* lastNode = firstNode;
+		while (lastNode->next)
+		{
+			lastNode = lastNode->next;
+		}
+		lastNode->next = newNode;
+	}
 }
 
 //链表的输出函数
