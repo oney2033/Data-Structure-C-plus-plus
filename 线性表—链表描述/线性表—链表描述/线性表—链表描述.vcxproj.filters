@@ -27,6 +27,12 @@
     <ClInclude Include="Chain.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="StudentRecord.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="StudentRecord4.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Chain.cpp">

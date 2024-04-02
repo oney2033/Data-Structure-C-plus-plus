@@ -2,8 +2,107 @@
 #include<iostream>
 #include"LinearLish.h"
 #include<numeric>
+#include"StudentRecord.h"
+#include"StudentRecord4.h"
 using namespace std;
 
+inline int f1(StudentRecord4& s) { return s.exam1; }
+inline int f2(StudentRecord4& s) { return s.exam2; }
+inline int f3(StudentRecord4& s)
+{
+	return s.exam1 + s.exam2 + s.exam3;
+}
+int main()
+{	
+	//桶排序，放在chain的类中
+	studentRecord s;
+	chain<studentRecord>theChain;
+	for (int i = 1; i <= 20; i++)
+	{
+		s.score = i / 2;
+		s.name = new string(s.score, 'a');
+		theChain.insert(0, s);
+	}
+	cout << "The unsorted chain is" << endl;
+	cout << "  " << theChain << endl;
+	theChain.binSort(10);
+	cout << "The sorted chain is" << endl;
+	cout << "  " << theChain << endl;
+
+	//对链中的节点进行排序,排序键为 value（theElement）
+	StudentRecord4 x;
+	chain<StudentRecord4>basesort;
+	for (int i = 1; i <= 20; i++)
+	{
+		x.exam1 = i / 2;
+		x.exam1 = i / 2;
+		x.exam2 = 20 - i;
+		x.exam3 = rand() % 100;
+		x.name = i;
+		basesort.insert(0, x);
+	}
+	basesort.binSort(10, f1);
+	cout << "Sort on exam 1" << endl;
+	cout << "  " << basesort << endl;
+	basesort.binSort(20, f2);
+	cout << "Sort on exam 2" << endl;
+	cout << "  " << basesort << endl;
+	basesort.binSort(130, f3);
+	cout << "Sort on sum of exams" << endl;
+	cout << "  " << basesort << endl;
+
+}
+
+
+//桶排序，没有放在chain的类中
+#if 0
+void binSort(chain<studentRecord>& thechain, int range)
+{
+	//按分数排序,初始化箱子
+	chain<studentRecord>* bin;
+	bin = new chain<studentRecord>[range + 1];
+
+	//将学生记录从链表分发到箱子里
+	int	numberOfElements = thechain.size();
+	for (int i = 1; i <= numberOfElements; i++)
+	{
+		studentRecord x = thechain.get(0);
+		thechain.erase(0);
+		bin[x.score].insert(0, x);
+	}
+
+	//从箱子中收集元素
+	for (int j = range; j >= 0; j--)
+	{
+		while (!bin[j].empty())
+		{
+			studentRecord x = bin[j].get(0);
+			bin[j].erase(0);
+			thechain.insert(0, x);
+		}
+	}
+	delete[] bin;
+
+}
+int main()
+{
+	studentRecord s;
+	chain<studentRecord> c;
+	for (int i = 1; i <= 20; i++)
+	{
+		s.score = i / 2;
+		s.name = new string(s.score, 'a');
+		c.insert(0, s);
+	}
+	cout << "The unsorted chain is" << endl;
+	cout << "  " << c << endl;
+	binSort(c, 10);
+	cout << "The sorted chain is" << endl;
+	cout << "  " << c << endl;
+}
+#endif
+
+#if 0
 //测试链表类
 int main()
 {
@@ -31,7 +130,7 @@ int main()
 		*i += 1;
 	}
 	cout << endl;
-	
+
 	cout << "Incremented by 1 list is " << y << endl;
 
 	// 试用STL算法
@@ -39,6 +138,8 @@ int main()
 	cout << "The sum of the elements is " << sum << endl;
 
 	return 0;
+}
+#endif
 
 #if 0
 	//测试构造函数
@@ -118,5 +219,5 @@ int main()
 	std::cout << "y is " << y << std::endl;
 
 	return 0;
-#endif
 }
+#endif

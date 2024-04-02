@@ -24,6 +24,12 @@ public:
 	void clear();
 	void push_back(const T& theElment);
 
+	//桶排序，时间复杂度 O( n + range )
+	void binSort(int range);
+
+	//对链中的节点进行排序,排序键为 value（theElement）
+	void binSort(int range, int(*value)(T& x));
+
 	//链表的迭代器开始定义
 	class iterator;
 	iterator begin() { return iterator(firstNode); }
@@ -265,6 +271,106 @@ void chain<T>::push_back(const T& theElment)
 		lastNode->next = newNode;
 	}
 }
+
+
+//binSort函数
+template<class T>
+void chain<T>::binSort(int range)
+{
+	//创建并初始化桶
+	chainNode<T>** bottom, ** top;
+	bottom = new chainNode<T>*[range + 1];
+	top = new chainNode<T>*[range + 1];
+	for (int b = 0; b <= range; b++)
+	{
+		bottom[b] = NULL;
+	}
+
+	//将数字分到桶中
+	for (; firstNode != NULL; firstNode = firstNode->next)
+	{
+		int thebin = firstNode->element;
+		if (bottom[thebin] == NULL)
+		{
+			bottom[thebin] = top[thebin] = firstNode;
+		}
+		else
+		{
+			top[thebin]->next = firstNode;
+			top[thebin] = firstNode;
+		}
+	}
+	//将桶中的数字进行稳定排序，不改变相对位置
+	chainNode<T>* y = NULL;
+	for (int theBin = 0; theBin <= range; theBin++)
+	{
+		//桶不为空
+		if (bottom[theBin] != NULL)
+		{
+			if (y == NULL)//第一个不为空的箱子
+				firstNode = bottom[theBin];
+			else
+				y->next = bottom[theBin];
+			y = top[theBin];
+		}
+	}
+	if (y != NULL)
+		y->next = NULL;
+	delete[]bottom;
+	delete[]top;
+}
+
+//基数排序
+template<class T>
+void chain<T>::binSort(int range, int(*value)(T& x))
+{
+	chainNode<T>** bottom, ** top;
+	bottom = new chainNode<T>*[range + 1];
+	top = new chainNode<T>*[range + 1];
+	for (int b = 0; b <= range; b++)
+	{
+		bottom[b] = NULL;
+	}
+
+	for (; firstNode != NULL; firstNode = firstNode->next)
+	{
+		int thebin = value(firstNode->element);
+		if (bottom[thebin] == NULL)
+		{
+			bottom[thebin] = top[thebin] = firstNode;
+		}
+		else
+		{
+			top[thebin]->next = firstNode;
+			top[thebin] = firstNode;
+		}
+	}
+
+	chainNode<T>* y = NULL;
+	for (int thebin = 0; thebin <= range; thebin++)
+	{
+		if (bottom[thebin] != NULL)
+		{
+			if (y == NULL)
+			{
+				firstNode = bottom[thebin];
+			}
+			else
+			{
+				y->next = bottom[thebin];
+			}
+			y = top[thebin];
+		}
+	}
+
+	if (y != NULL)
+	{
+		y->next = NULL;
+	}
+	delete[] bottom;
+	delete[] top;
+}
+
 
 //链表的输出函数
 template<class T>
