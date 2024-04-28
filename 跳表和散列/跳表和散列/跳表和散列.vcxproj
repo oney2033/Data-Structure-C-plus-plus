@@ -130,7 +130,12 @@
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="compress.h" />
+    <ClInclude Include="decompress.h" />
     <ClInclude Include="dictionary.h" />
+    <ClInclude Include="Hash.h" />
+    <ClInclude Include="HashChains.h" />
+    <ClInclude Include="hashTable.h" />
     <ClInclude Include="PairNode.h" />
     <ClInclude Include="skipList.h" />
     <ClInclude Include="skipNode.h" />

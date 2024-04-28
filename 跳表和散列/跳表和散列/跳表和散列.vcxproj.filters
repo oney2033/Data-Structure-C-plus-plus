@@ -35,5 +35,20 @@
     <ClInclude Include="skipList.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="Hash.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="hashTable.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="HashChains.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="compress.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="decompress.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>
