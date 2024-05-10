@@ -10,8 +10,8 @@ class maxHeap :public maxPriorityQueue<T>
 {
 public:
 	maxHeap(int initialCapacity = 10);
-	//~maxHeap() { delete[]heap; }
-	~maxHeap() {}
+	~maxHeap() { delete[]heap; }
+	
 	bool empty()const { return heapSize == 0; }
 	int size()const { return heapSize; }
 	const T& top()
@@ -76,7 +76,7 @@ template<class T>
 void maxHeap<T>::pop()
 {//删除最大元素
 	if (heapSize == 0)throw queempty();
-	// heap[1].~T();
+	 heap[1].~T();
 
 	 //删除最后一个元素，然后重新建堆
 	T lastElement = heap[heapSize--];
@@ -106,8 +106,9 @@ void maxHeap<T>::pop()
 template<class T>
 void maxHeap<T>::initialize(T* theheap, int theSize)
 {//在数组theHeap[1:theSize]中建大根堆
-	delete[]heap;
-	heap = theheap;
+	delete[] heap;
+	heap = new T[theSize + 1];
+	std::copy(theheap + 1, theheap + theSize + 1, heap + 1);
 	heapSize = theSize;
 
 	//堆化
