@@ -70,6 +70,9 @@ protected:
 //编译器无法自动推导出类型，手动定义一下
 void (*linkedBinaryTree<int>::visit)(binaryTreeNode<int>*);
 void (*linkedBinaryTree<booster>::visit)(binaryTreeNode<booster>*);
+void (*linkedBinaryTree<std::pair<int, int> >::visit)(binaryTreeNode<std::pair<int, int> >*);
+void (*linkedBinaryTree<std::pair< const int, char> >::visit)(binaryTreeNode<std::pair< const int, char> >*);
+void (*linkedBinaryTree<std::pair< const int, int> >::visit)(binaryTreeNode<std::pair< const int, int> >*);
 
 //删除并返回左子树
 template<class E>

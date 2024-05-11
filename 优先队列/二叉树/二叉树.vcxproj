@@ -139,6 +139,7 @@
     <ClInclude Include="booster.h" />
     <ClInclude Include="change1Dlength.h" />
     <ClInclude Include="linkedBinaryTree.h" />
+    <ClInclude Include="maxHblt.h" />
     <ClInclude Include="maxHeap.h" />
     <ClInclude Include="maxPriorityQueue.h" />
     <ClInclude Include="myExceptions.h" />
