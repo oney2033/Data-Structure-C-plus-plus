@@ -6,6 +6,7 @@
 #include"booster.h"
 #include"binaryTree.h"
 
+//Á´Ê½¶þ²æÊ÷
 template<class E>
 class linkedBinaryTree : public binaryTree<binaryTreeNode<E>>
 {

@@ -6,10 +6,36 @@
 #include"maxHeap.h"
 #include"maxHblt.h"
 #include"maxPriorityQueue.h"
+#include"heapSort.h"
+#include"minHeap.h"
+#include"huffmanTree.h"
 
 using namespace std;
 int main(void)
 {
+	//测试构造一棵霍夫曼树,用整型 1-n 来表示字符
+	int	a[11];
+	int n = 10;
+	for (int i = 1; i <= n; i++)
+	{
+		a[i] = 2 * i;
+	}
+	linkedBinaryTree<int>* x = huffmanTree(a, n);
+	x->postOrderOutput();
+
+#if 0
+	//测试大根堆排序
+	int a[11], i, n = 10;
+	for (i = 1; i <= 10; i++)
+		a[i] = n - i + 1;
+	
+	heapSort(a, 10);
+	copy(a+1, a + n+1, ostream_iterator<int>(cout, " "));
+	cout << endl;
+
+	return 0;
+#endif
+#if 0
 	//测试高度优先的最大左高树,后序遍历输出
 	maxHblt<int> h, j;
 	int a[6] = { 0, 7, 9, 1, 8, 11 };
@@ -80,7 +106,7 @@ int main(void)
 		}
 		catch (queempty) { break; }
 	}
-
+#endif
 #if 0
 	//测试优先队列
 	//测试构造函数和push函数
@@ -227,5 +253,4 @@ int main(void)
 	cout << "Level order sequence is ";
 	y.levelOrderOutput();
 #endif
-
 }

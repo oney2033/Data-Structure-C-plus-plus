@@ -56,5 +56,17 @@
     <ClInclude Include="maxHblt.h">
       <Filter>源文件</Filter>
     </ClInclude>
+    <ClInclude Include="heapSort.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="minHeap.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="huffmanNode.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
+    <ClInclude Include="huffmanTree.h">
+      <Filter>源文件</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

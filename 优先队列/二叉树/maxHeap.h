@@ -6,6 +6,7 @@
 #include<algorithm>
 #include<iostream>
 
+//´ó¸ù¶Ñ
 template<class T>
 class maxHeap :public maxPriorityQueue<T>
 {
