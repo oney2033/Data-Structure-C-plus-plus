@@ -27,7 +27,7 @@ public:
 	void output(std::ostream& out)const;
 
 
-	//列表开始和结束的迭代器
+	//列表开始和结束的迭代器,提前定义
 	class iterator;
 	iterator begin() { return iterator(element); }
 	iterator end() { return iterator(element + listSize); }
